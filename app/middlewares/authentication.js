@@ -1,11 +1,11 @@
-var Token = require("../helpers/manage-tokens");
+var Token = require('../helpers/manage-tokens');
 
 exports.requireAuthentication = function (req, res, next) {
   var token = req.headers.token;
 
   if (
-    token === "null" ||
-    token === "undefined" ||
+    token === 'null' ||
+    token === 'undefined' ||
     token === undefined ||
     token === null
   ) {
@@ -29,7 +29,7 @@ exports.requireAuthentication = function (req, res, next) {
       })
       .catch((data) => {
         return res.json({
-          message: "Token invalid",
+          message: 'Token invalid',
           success: false,
         });
       });

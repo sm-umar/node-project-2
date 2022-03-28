@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 
 const Album = require('./album');
 
@@ -15,26 +13,34 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Photo.belongsTo(models.Album, {
         as: 'album',
-        foreignKey: 'id'
+        foreignKey: 'id',
       });
       Photo.belongsTo(models.Location, {
         as: 'location',
-        foreignKey: 'id'
+        foreignKey: 'id',
       });
       Photo.hasMany(models.Comment, {
         as: 'comments',
-        foreignKey: 'photoId'
+        foreignKey: 'photoId',
+      });
+      Photo.belongsToMany(models.Tag, {
+        through: models.Tag_Photo,
+        as: 'tags',
+        foreignKey: 'photoId',
       });
     }
   }
-  Photo.init({
-    albumId: DataTypes.INTEGER,
-    locationId: DataTypes.INTEGER,
-    title: DataTypes.STRING,
-    description: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Photo',
-  });
+  Photo.init(
+    {
+      albumId: DataTypes.INTEGER,
+      locationId: DataTypes.INTEGER,
+      title: DataTypes.STRING,
+      description: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: 'Photo',
+    }
+  );
   return Photo;
 };

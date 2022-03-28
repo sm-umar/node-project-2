@@ -1,5 +1,5 @@
-var jwt = require("jsonwebtoken");
-const config = require("../config/config.json");
+var jwt = require('jsonwebtoken');
+const config = require('../config/config.json');
 var moment = require('moment');
 
 /************************************************
@@ -7,13 +7,13 @@ var moment = require('moment');
 *************************************************/
 
 exports.createToken = function (user) {
-var expire = moment().add(7, 'days').valueOf();
+  var expire = moment().add(7, 'days').valueOf();
   var payload = {
     ...user,
     expire: expire,
   };
 
-  var token = jwt.sign(payload, config.PRIVATE_KEY);
+  var token = jwt.sign(payload, config.private_key);
   return token;
 };
 
@@ -24,9 +24,9 @@ var expire = moment().add(7, 'days').valueOf();
 exports.getTokenData = function (token) {
   return new Promise((resolve, reject) => {
     try {
-      let payload = jwt.verify(token, config.PRIVATE_KEY);
+      let payload = jwt.verify(token, config.private_key);
       if (payload.expire <= Date.now() / 1000) {
-        resolve({ status: false,  message: 'Token has expired' });
+        resolve({ status: false, message: 'Token has expired' });
       } else {
         resolve({ payload: payload, status: true });
       }

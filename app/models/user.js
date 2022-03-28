@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const { Model } = require('sequelize');
+var bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -22,8 +24,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "User",
+      modelName: 'User',
     }
   );
+
+  User.beforeCreate(async (user, options) => {
+    const hash = bcrypt.hashSync(user.password, 10);
+    user.password = hash;
+  });
+
+  User.prototype.comparePassword = (password, userPassword, callback) => {
+    bcrypt.compare(password, userPassword, callback);
+  };
+
   return User;
 };
