@@ -8,7 +8,6 @@ const { Comment } = models;
 /************************************************
     Register New User
 *************************************************/
-
 exports.createUser = async (req, res) => {
   var data = req.body;
   var newUser = await User.create({
@@ -29,7 +28,6 @@ exports.createUser = async (req, res) => {
 /************************************************
     Login User
 *************************************************/
-
 exports.verifyUser = async (req, res) => {
   console.log('req.body: ', req.body);
   var data = req.body;
@@ -57,6 +55,9 @@ exports.verifyUser = async (req, res) => {
     .catch(() => {});
 };
 
+/************************************************
+    Get All Users
+*************************************************/
 exports.getAll = async (req, res) => {
   var data = await User.findAll({});
   res.status(200).json({ data });

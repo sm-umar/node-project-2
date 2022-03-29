@@ -5,6 +5,9 @@ const { Location } = models;
 const { Comment } = models;
 const { Album } = models;
 
+/************************************************
+   Add New Album
+*************************************************/
 exports.create = async (req, res) => {
   if (req.user) {
     var reqData = req.body;
@@ -31,6 +34,9 @@ exports.create = async (req, res) => {
   }
 };
 
+/************************************************
+    Edit Album
+*************************************************/
 exports.update = async (req, res) => {
   if (req.user) {
     var albumId = req.params.id;
@@ -64,6 +70,9 @@ exports.update = async (req, res) => {
   }
 };
 
+/************************************************
+    Delete Album
+*************************************************/
 exports.delete = async (req, res) => {
   if (req.user) {
     var reqData = req.body;
@@ -89,6 +98,9 @@ exports.delete = async (req, res) => {
   }
 };
 
+/************************************************
+    Get All Albums
+*************************************************/
 exports.getAll = async (req, res) => {
   await Album.findAll({})
     .then((data) => res.status(200).json(data))

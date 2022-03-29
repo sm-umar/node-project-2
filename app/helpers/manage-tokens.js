@@ -5,7 +5,6 @@ var moment = require('moment');
 /************************************************
   Create Token
 *************************************************/
-
 exports.createToken = function (user) {
   var expire = moment().add(7, 'days').valueOf();
   var payload = {
@@ -20,7 +19,6 @@ exports.createToken = function (user) {
 /************************************************
   Decode Token
 *************************************************/
-
 exports.getTokenData = function (token) {
   return new Promise((resolve, reject) => {
     try {

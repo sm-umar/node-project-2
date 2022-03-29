@@ -7,6 +7,9 @@ const { Album } = models;
 const { Tag_Photo } = models;
 var async = require('async');
 
+/************************************************
+    Add New Photo
+*************************************************/
 exports.create = async (req, res) => {
   if (req.user) {
     var reqData = req.body;
@@ -67,6 +70,9 @@ exports.create = async (req, res) => {
   }
 };
 
+/************************************************
+    Edit Photo
+*************************************************/
 exports.update = async (req, res) => {
   if (req.user) {
     var photoId = req.params.id;
@@ -116,6 +122,9 @@ exports.update = async (req, res) => {
   }
 };
 
+/************************************************
+    Delete Photo
+*************************************************/
 exports.delete = async (req, res) => {
   if (req.user) {
     var reqData = req.body;
@@ -141,6 +150,9 @@ exports.delete = async (req, res) => {
   }
 };
 
+/************************************************
+    Get All Photos
+*************************************************/
 exports.getAll = async (req, res) => {
   await Photo.findAll({
     include: ['comments', 'tags', 'album', 'location'],
