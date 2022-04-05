@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.post('/create', auth.requireAuthentication, controller.create);
 router.post('/update/:id', auth.requireAuthentication, controller.update);
-router.post('/delete', auth.requireAuthentication, controller.delete);
+router.post('/delete/:id', auth.requireAuthentication, controller.delete);
 router.get('/getAll', controller.getAll);
 
 module.exports = router;
